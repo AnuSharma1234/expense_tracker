@@ -46,3 +46,46 @@ h4{
 .inc-exp-container > div:first-of-type{
     border-right: 1px sold #dedede;
 }
+.money{
+  font-size: 2;
+  letter-spacing: 1px;
+  margin: 5px 0;
+}
+.money-plus{
+  color: #2ecc71;
+}
+.money-minus{
+  color: #c0392b;
+}
+label{
+  display:inline-block;
+  margin: 10px 0;
+}
+input[type="text"],input[type="number"]{
+  border: 1px solid #dedede;
+  border-radius: 2px;
+  display: block;
+  font-size: 16px;
+  padding: 10px;
+  width: 100%;
+}
+.btn{
+  cursor: pointer;
+  background-color: #9c8ff;
+  box-shadow: var(--box-shadow);
+  color: #fff;
+  border: 0;
+  display: block;
+  font-size: 16px;
+  margin: 10px 0 30px;
+  padding: 18px;
+  width: 100%;
+}
+.btn:focus,.delete-btn:focus{
+  outline:0;
+}
+.list{
+  list-style-type:none;
+  padding: 0;
+  margin-bottom: 48px;
+}
