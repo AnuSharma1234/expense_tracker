@@ -98,11 +98,12 @@ input[type="text"],input[type="number"]{
     position: relative;
     padding: 10px;
     margin: 10px 0;
+    cursor: pointer;
 }
-list li.plus{
+.list li.plus{
     border-right: 5px solid #2ecc71;
 }
-list li.minus{
+.list li.minus{
     border-right: 5px solid #c0392b;
 }
 .delete-btn{
@@ -112,14 +113,14 @@ list li.minus{
     color: #fff;
     font-size: 20px;
     line-height: 20px;
-    padding: 2px 5px;
+    padding: 10px 10px;
     position: absolute;
-    top: 50%;
+    top: 0%;
     left: 0;
     transform: translate(-100%);
     opacity: 0;
     transition: opacity 0.3s ease;
 }
-.list li:hover.delete-btn{
+.list li:hover .delete-btn{
     opacity: 1;
 }
