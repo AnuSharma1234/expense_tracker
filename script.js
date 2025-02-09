@@ -3,27 +3,34 @@ const moneyPlus = document.getElementById("money-plus");
 const moneyMinus = document.getElementById("money-minus");
 const list = document.getElementById("list");
 const form = document.getElementById("list");
-const text = document.getElementById("text");
-const amount = document.getElementById("amount");
+const textInput = document.getElementById("text");
+const amountInput = document.getElementById("amount");
+const submitButton = document.getElementById("btn");
+const deleteButton = document.querySelector(".delete-btn");
 
-const dummyTransaction = [
-    {id: 1,text: "flower" , amount: -20},
-    {id: 2,text: "Salary" , amount: -20},
-    {id: 3,text: "books" , amount: 60},
-    {id: 4, text: "watch", amount: 70}
-]
-let transaction = dummyTransaction;
+let Transactions = [];
+var i = 0;
 
-function addTransaction(transaction){
-    const sign = transaction[2].amount < 0 ? "-" : "+";
-    const item = document.createElement("li");
-
-    item.classList.add(
-        transaction[2].amount > 0 ? "plus" : "minus"
-    )
-    item.innerHTML = `${transaction[2].text} <span>${transaction[2].amount}</span><button class="delete-btn">X</button>`;
-    list.appendChild(item);
+function updateUI(){
+    
 }
+function addTransaction(event){
+    event.preventDefault();
+    const text = textInput.value.trim();
+    const amount = parseFloat(amountInput.value);
 
-const addTransactionButton = document.getElementById('btn');
-addTransactionButton.addEventListener("click",addTransaction(transaction));
+    if(text = '' || isNaN(amount)){
+        alert("Enter a valid text and description");
+    }
+    
+    const transaction = {
+        id: i,
+        text,
+        amount
+    };
+    i++;
+
+    Transactions.push(transaction);
+    updateUI();
+
+}
