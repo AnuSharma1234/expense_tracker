@@ -1,36 +1,43 @@
-const balance = document.getElementById("balance");
-const moneyPlus = document.getElementById("money-plus");
-const moneyMinus = document.getElementById("money-minus");
-const list = document.getElementById("list");
-const form = document.getElementById("list");
+const addTransactionButton = document.getElementById("btn");
 const textInput = document.getElementById("text");
 const amountInput = document.getElementById("amount");
-const submitButton = document.getElementById("btn");
-const deleteButton = document.querySelector(".delete-btn");
+const historyList = document.getElementById("list");
+const totalBalance = document.getElementById("balance");
+const income = document.getElementById("money-plus");
+const expense = document.getElementById("money-minus");
+const deleteTransactionButton = document.querySelector(".delete-btn");
 
-let Transactions = [];
-var i = 0;
+const Transactions = [];
 
-function updateUI(){
-    
-}
 function addTransaction(event){
     event.preventDefault();
     const text = textInput.value.trim();
-    const amount = parseFloat(amountInput.value);
+    const amount = amountInput.value;
 
-    if(text = '' || isNaN(amount)){
-        alert("Enter a valid text and description");
-    }
-    
     const transaction = {
-        id: i,
+        id: Date.now(),
         text,
         amount
-    };
-    i++;
-
+    }
     Transactions.push(transaction);
+    updateHistory(text,amount);
+    clearInputs();
     updateUI();
-
 }
+function clearInputs(){
+    textInput.value = '';
+    amountInput.value = '';
+}
+function updateHistory(description , value){
+    const sign = value >= 0 ? "+" : "-" ;
+    const newTransaction = document.createElement("li");
+    newTransaction.className = value >= 0 ? "plus" : "minus";
+    newTransaction.innerHTML = `${description} <span>${sign}$${Math.abs(value)}</span> <button class = "delete-btn">X</button>`;
+    historyList.appendChild(newTransaction);
+}
+function updateUI(){
+    const amounts = Transactions.map(transaction => transaction.amount);
+    const updatedBalance = amounts.reduce((acc,item)=> acc+item).toFixed(2);
+    totalBalance.innerHTML = `${updatedBalance}`;
+}
+addTransactionButton.addEventListener("click",addTransaction);
