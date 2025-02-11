@@ -14,6 +14,11 @@ function addTransaction(event){
     const text = textInput.value.trim();
     const amount = amountInput.value;
 
+    if(text == '' || isNaN(amount)){
+        alert("Enter a valid description and amount!");
+        return;
+    }
+
     const transaction = {
         id: Date.now(),
         text,
@@ -37,7 +42,15 @@ function updateHistory(description , value){
 }
 function updateUI(){
     const amounts = Transactions.map(transaction => transaction.amount);
-    const updatedBalance = amounts.reduce((acc,item)=> acc+item).toFixed(2);
+    const updatedBalance = parseInt(amounts.reduce((acc,item)=> (acc+=item),0)).toFixed(2);
     totalBalance.innerHTML = `${updatedBalance}`;
+
+    const incomeArray = amounts.filter((amount)=> amount >= 0);
+    const updatedIncome = parseInt(incomeArray.reduce((acc,item)=> acc += item,0)).toFixed(2);
+    income.innerHTML = `+$${updatedIncome}`;
+
+    const expenseArray = amounts.filter((amount) => amount < 0);
+    const updatedExpense = parseInt(expenseArray.reduce((acc,item) => acc += item),0).toFixed(2);
+    expense.innerHTML = `-$${Math.abs(updatedExpense)}`;
 }
 addTransactionButton.addEventListener("click",addTransaction);
